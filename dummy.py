@@ -11,7 +11,7 @@ def second_part(input_file):
 
 
 if __name__ == '__main__':
-    # Read in the input file.
+    # Read the input file.
     with open("inputs/dummy.txt", "r") as myfile:
         input_file = [i.rstrip("\n") for i in myfile.readlines()]
     
