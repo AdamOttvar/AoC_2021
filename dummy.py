@@ -1,5 +1,6 @@
 import lib.AoC_lib as AoC
 from collections import deque
+import copy
 
 @AoC.timer
 def first_part(input_file):
@@ -21,16 +22,17 @@ if __name__ == '__main__':
     # Read the input file.
 
     if USE_TEST_INPUT:
-        with open('inputs/dummy.txt', 'r') as input_file:
-            input = [int(i.rstrip('\n')) for i in input_file.readlines()]
+        filename = 'inputs/dummy.txt'
     else:
-        with open('inputs/input' + DAY + '.txt', 'r') as input_file:
-            input = [int(i.rstrip('\n')) for i in input_file.readlines()]
+        filename = 'inputs/input' + DAY + '.txt'
+    
+    with open(filename, 'r') as input_file:
+            input = [AoC.split_string_to_int_list(i.rstrip('\n')) for i in input_file.readlines()]
 
     #print(input)
 
     print('First solution for day' + DAY + ': ')
-    print('Result: ' + str(first_part(input)))
+    print('Result: ' + str(first_part(copy.deepcopy(input))))
 
     print('Second solution for day' + DAY + ': ')
-    print('Result: ' + str(second_part(input)))
+    print('Result: ' + str(second_part(copy.deepcopy(input))))
