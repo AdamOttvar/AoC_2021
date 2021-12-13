@@ -38,7 +38,6 @@ def get_dict_of_digit_mapping(line):
             map_to_sections[6] = digit
     
     # Map 3, 5 and 2
-    print(dict_of_length)
     for digit in dict_of_length[5]:
         one_in_three = set(sorted(map_to_sections[1])).issubset(set(sorted(digit)))
         five_in_six = set(sorted(digit)).issubset(set(sorted(map_to_sections[6])))
@@ -78,8 +77,8 @@ def second_part(input_file):
     for line in input_file:
         segment_mapping = get_dict_of_digit_mapping(line)
         output_digits = get_output_digits(line)
-        print('main')
-        print(segment_mapping)
+        #print('main')
+        #print(segment_mapping)
 
         output_list = []
         for digit in output_digits:
