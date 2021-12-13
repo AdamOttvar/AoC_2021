@@ -13,50 +13,27 @@ def create_graph(input_list):
     
     return graph
 
-def traverse_graph(graph, start, end, visited, path_list):
+def traverse_graph(graph, start, end, visited, path_list, allow_twice=False):
     global counter
 
     if start.islower():
-        visited[start] = True
+        visited[start] += 1
     path_list.append(start)
 
     if start == end:
+        #print(','.join(path_list))
         counter += 1
     else:
         for i in graph[start]:
-            if not visited[i]:
-                traverse_graph(graph,i,end,visited,path_list)
-    
+            if visited[i] < 1:
+                traverse_graph(graph,i,end,visited,path_list,allow_twice)
+            elif visited[i] == 1 and allow_twice and i != 'start':
+                allow_twice = False
+                traverse_graph(graph,i,end,visited,path_list,allow_twice)
+                allow_twice = True
+
     path_list.pop()
-    visited[start] = False
-
-
-def traverse_graph_2(graph, start, end, visited, path_list, allow_twice=True):
-    global counter
-
-    if start.islower():
-        if start == 'start':
-            visited[start] = True
-        elif allow_twice:
-            visited[start] = False
-            allow_twice = False
-        else:
-            visited[start] = True
-            allow_twice = False
-    
-    path_list.append(start)
-
-    if start == end:
-        counter += 1
-        print(path_list)
-    else:
-        for i in graph[start]:
-            if not visited[i]:
-                traverse_graph_2(graph,i,end,visited,path_list,allow_twice)
-    
-    path_list.pop()
-    visited[start] = False
-    allow_twice = True
+    visited[start] -= 1
 
 
 @AoC.timer
@@ -79,16 +56,15 @@ def second_part(input_file):
     graph = create_graph(input_file)
     visited = defaultdict(int)
     path = []
-    counter = 0
 
-    traverse_graph_2(graph, 'start', 'end', visited, path)
+    traverse_graph(graph, 'start', 'end', visited, path, allow_twice=True)
 
     return counter
 
 
 if __name__ == '__main__':
     DAY = '12'
-    USE_TEST_INPUT = True
+    USE_TEST_INPUT = False
     # Read the input file.
 
     if USE_TEST_INPUT:
