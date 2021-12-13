@@ -90,7 +90,7 @@ def second_part(input_file):
         if len(flashed_this_iteration) == len(input_file)*len(input_file[0]):
             #print('==== Step ' + str(iteration+1) + ' ====')
             #print('Flashed: ' + str(len(flashed_this_iteration)))
-            #AoC.print_2D_map(input_file)
+            #AoC.print_2D_int_map(input_file)
             return iteration+1
 
     return result
@@ -110,7 +110,7 @@ if __name__ == '__main__':
     with open(filename, 'r') as input_file:
             input = [AoC.split_string_to_int_list(i.rstrip('\n')) for i in input_file.readlines()]
 
-    AoC.print_2D_map(input)
+    AoC.print_2D_int_map(input)
 
     print('First solution for day' + DAY + ': ')
     print('Result: ' + str(first_part(copy.deepcopy(input))))
